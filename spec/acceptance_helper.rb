@@ -1,7 +1,7 @@
-require 'spec_helper'
-require 'webmock/rspec'
-require 'mock_api'
-require 'ipfs/client'
+require "spec_helper"
+require "webmock/rspec"
+require "mock_api"
+require "ipfs/client"
 
 RSpec.configure do |config|
   config.before :each do
@@ -15,7 +15,7 @@ def ipfs_client
 end
 
 def default_host
-  'http://myhost.com'
+  "http://myhost.com"
 end
 
 def default_port

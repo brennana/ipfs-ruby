@@ -1,11 +1,10 @@
-require 'acceptance_helper'
+require "acceptance_helper"
 
-describe 'ls command' do
-
+describe "ls command" do
   let(:ipfs) { ipfs_client }
-  let(:node) { 'QmNkJjVzQP9nzuZub4R5jPw7GrotYwKkHgEqMSUfW6jcPt' }
+  let(:node) { "QmNkJjVzQP9nzuZub4R5jPw7GrotYwKkHgEqMSUfW6jcPt" }
 
-  it 'issues the right API request' do
+  it "issues the right API request" do
     ipfs.ls node
 
     expect(WebMock).to have_requested(
@@ -13,13 +12,12 @@ describe 'ls command' do
     )
   end
 
-  it 'parses the result' do
+  it "parses the result" do
     result = ipfs.ls node
 
-    expect(result.map(&:hashcode)).to eq ['Hash1', 'Hash2']
-    expect(result.first.links.first.name).to eq 'Link'
-    expect(result.first.links.first.hashcode).to eq 'Hash3'
+    expect(result.map(&:hashcode)).to eq ["Hash1", "Hash2"]
+    expect(result.first.links.first.name).to eq "Link"
+    expect(result.first.links.first.hashcode).to eq "Hash3"
     expect(result.first.links.first.size).to eq 500
   end
-
 end

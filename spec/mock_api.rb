@@ -1,29 +1,29 @@
-require 'sinatra/base'
-require 'json'
+require "sinatra/base"
+require "json"
 
 class MockAPI < Sinatra::Base
-  get '/api/v0/ls' do
+  get "/api/v0/ls" do
     content_type :json
 
     {
       Objects: [
         {
-          Hash: 'Hash1',
+          Hash: "Hash1",
           Links: [{
-            Name: 'Link',
-            Hash: 'Hash3',
-            Size: 500
-          }]
+            Name: "Link",
+            Hash: "Hash3",
+            Size: 500,
+          }],
         },
         {
-          Hash: 'Hash2',
-          Links: []
-        }
-      ]
+          Hash: "Hash2",
+          Links: [],
+        },
+      ],
     }.to_json
   end
 
-  get '/api/v0/cat' do
-    'This is just some text.'
+  get "/api/v0/cat" do
+    "This is just some text."
   end
 end

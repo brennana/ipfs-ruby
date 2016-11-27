@@ -1,11 +1,10 @@
-require 'acceptance_helper'
+require "acceptance_helper"
 
-describe 'cat command' do
-
+describe "cat command" do
   let(:ipfs) { ipfs_client }
-  let(:node) { 'QmNkJjVzQP9nzuZub4R5jPw7GrotYwKkHgEqMSUfW6jcPt' }
+  let(:node) { "QmNkJjVzQP9nzuZub4R5jPw7GrotYwKkHgEqMSUfW6jcPt" }
 
-  it 'issues the right API request' do
+  it "issues the right API request" do
     ipfs.cat node
 
     expect(WebMock).to have_requested(
@@ -13,10 +12,9 @@ describe 'cat command' do
     )
   end
 
-  it 'returns the result' do
+  it "returns the result" do
     result = ipfs.cat node
 
-    expect(result).to eq 'This is just some text.'
+    expect(result).to eq "This is just some text."
   end
-
 end

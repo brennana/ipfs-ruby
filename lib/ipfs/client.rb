@@ -1,11 +1,10 @@
-require 'ipfs/commands/ls'
-require 'ipfs/commands/cat'
+require "ipfs/command"
 
 module IPFS
   class Client
-    DEFAULT_HOST = 'http://localhost'
+    DEFAULT_HOST = "http://localhost".freeze
     DEFAULT_PORT = 5001
-    API_VERSION = 'v0'
+    API_VERSION = "v0".freeze
 
     attr_reader :host, :port
 
@@ -14,7 +13,8 @@ module IPFS
     end
 
     def initialize(host:, port:)
-      @host, @port = host, port
+      @host = host
+      @port = port
     end
 
     def api_url
@@ -22,11 +22,11 @@ module IPFS
     end
 
     def ls(node)
-      Commands::LS.call self, node
+      Commands::LS.call client, node
     end
 
     def cat(node)
-      Commands::Cat.call self, node
+      Commands::Cat.call client, node
     end
   end
 end
