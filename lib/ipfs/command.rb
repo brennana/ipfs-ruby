@@ -1,5 +1,6 @@
-require "ipfs/command/ls"
-require "ipfs/command/cat"
+Dir["./lib/ipfs/command/**/*.rb"].each do |f|
+  require f
+end
 
 module IPFS
   class Command
@@ -20,11 +21,19 @@ module IPFS
       HTTP.get(api_url, params: options)
     end
 
+    def post_file(file_or_io, options = {})
+      HTTP.post(api_url, params: options, form: { file: HTTP::FormData::File.new(file_or_io) })
+    end
+
     def api_url
-      "#{@url_base}/#{self.class.name}"
+      "#{@url_base}/#{command_path}"
     end
 
     private
+
+    def command_path
+      self.class.name.partition("Command::")[2].downcase.gsub("::", "/")
+    end
 
     def normalize_options(options)
       options.map do |k, v|

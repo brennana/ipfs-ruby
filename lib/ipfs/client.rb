@@ -21,12 +21,24 @@ module IPFS
       "#{host}:#{port}/api/#{API_VERSION}"
     end
 
+    def add(file_or_io, options = {})
+      Command::Add.call self, file_or_io, options
+    end
+
     def ls(node)
-      Commands::LS.call client, node
+      Command::LS.call self, node
     end
 
     def cat(node)
-      Commands::Cat.call client, node
+      Command::Cat.call self, node
+    end
+
+    def name_publish(node, options = {})
+      Command::Name::Publish.call self, node, options
+    end
+
+    def name_resolve(peer = nil, options = {})
+      Command::Name::Resolve.call self, peer, options
     end
   end
 end
